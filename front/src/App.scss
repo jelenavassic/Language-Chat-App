@@ -1,4 +1,5 @@
 $box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 15px;
+
 $primary: #c6e6ec;
 $secondary: #fddcef;
 $backround: #eac9c0;
@@ -38,6 +39,7 @@ ul {
 html,
 body {
   font-family: myFont;
+  background-color: $backround;
 
   // margin: 0 auto;
   scroll-behavior: smooth;
@@ -45,6 +47,7 @@ body {
 }
 ///////////////////////HEADER//////////////////////////////////////////////////
 #header {
+  z-index: 1000;
   position: fixed;
   top: 0;
   background-color: white;
@@ -174,10 +177,17 @@ body {
       background-color: white;
       border: 1px solid $text-primary;
       @include flex(center, center);
-      gap:1rem;
+      gap: 1rem;
       flex-direction: column;
       border-radius: 3%;
-
+      .error {
+        display: none;
+        color: red;
+      }
+      .errorM {
+        color: red;
+        font-size: 0.8rem;
+      }
       .inputAll {
         gap: 15%;
         @include flex(center, center);
@@ -210,15 +220,18 @@ body {
           background-color: $text-secondary;
         }
       }
-      a{  .ch {
-        color: $text-secondary;
+      a {
+        .ch {
+          color: $text-secondary;
+        }
+
+        .l {
+          color: $text-primary;
+          &:hover {
+            color: $text-secondary;
+          }
+        }
       }
-      
-      .l{color: $text-primary;
-        &:hover{
-        color: $text-secondary;
-      }}
-    }
     }
   }
 }
@@ -241,7 +254,10 @@ body {
       @include flex(center, center);
       flex-direction: column;
       border-radius: 3%;
-
+      .error {
+        display: none;
+        color: red;
+      }
       .inputAll {
         @include flex(center, center);
       }
@@ -275,16 +291,283 @@ body {
           background-color: $text-secondary;
         }
       }
-    a{  .ch {
-      color: $text-secondary;
+      a {
+        .ch {
+          color: $text-secondary;
+        }
+
+        .l {
+          color: $text-primary;
+          &:hover {
+            color: $text-secondary;
+          }
+        }
+      }
     }
-    
-    .l{color: $text-primary;
-      &:hover{
-      color: $text-secondary;
-    }}
   }
+}
+///////////////////////////////FOOTER///////////////////////////
+#footer {
+  // position: fixed;
+  // bottom: 0;
+  width: 98vw;
+  p {
+    color: $text-primary;
+    font-size: 0.8rem;
+  }
+  background-color: transparent;
+  @include flex(space-between, center);
+  flex-direction: row;
+  color: white;
+  // margin: 2%;
+  .social-media {
+    // padding: 2%;
+    margin-left: 2%;
+    @include flex(center, center);
+    flex-direction: row;
+    gap: 15%;
+    p {
+      padding: 20%;
+      color: $text-primary;
+      font-size: 0.8rem;
+    }
+
+    a {
+      color: $text-primary;
+    }
+  }
+}
+///////////////////////////////////////////ALL USERS//////////////////////////////////////////////
+#profile,
+#edit,
+#users,
+#fav,
+#myprofile {
+  background-color: $backround;
+  // height: 100vh;
+  // width: 100vw;
+  // padding: 0, 20%;
+  // display: grid;
+  // grid-template-columns: 15% 75%;
+  @include flex(flex-start, center);
+  flex-direction: column;
+  .sidebar {
+    position: fixed;
+    left: 0;
+    // height: 100vh;
+    width: 20%;
+    @include margin-top;
+    // @include flex(flex-start,center);
+    // flex-direction: column;
+    #side {
+      margin-top: 10%;
+      margin-left: 10%;
+
+      li {
+        margin-bottom: 5%;
+        // font-size: larger;
+        a {
+          color: $text-primary;
+          &:hover {
+            color: $text-secondary;
+          }
+        }
+      }
+    }
+  }
+  .main {
+    width: 85%;
+    margin-left: 15%;
+    // background-color: white;
+    //  margin-top:16vh;
+    //  @include margin-top;
+  }
+}
+#usersmain {
+  // @include margin-top;
+  margin-top: 13vh;
+  display: grid;
+  grid-template-columns: 81% 19%;
+
+  #allusers {
+    width: 100%;
+    background-color: white;
+    @include flex(center, center);
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1% 0;
+
+    .user {
+      width: 23%;
+      border-radius: 2%;
+      // height: 10%;
+      box-shadow: rgba(68, 45, 182, 0.35) 0px 5px 10px;
+      @include flex(flex-start, center);
+      flex-direction: column;
+      padding: 1%;
+      margin: 1%;
+      font-size: 1rem;
+      &:hover {
+        transform: scale(1.05);
+      }
+      .profileimg {
+        // width: 40%;
+        @include flex(center, center);
+        margin-bottom: 5%;
+        img {
+          width: 100%;
+          height: 9rem;
+        }
+      }
+    }
+  }
+  
+}
+.flex-row {
+  @include flex(center, center);
+  flex-direction: column;
+  gap: 8%;
+  margin-bottom: 8%;
+}
+
+.flex-column {
+  @include flex(center, center);
+  flex-direction: column;
+  margin-bottom: 5%;
+}
+
+.language-flex {
+  @include flex(center, center);
+  flex-direction: column;
+  gap: 0.4rem;
+  // margin-bottom:8%;
+  // background-color: rgb(159, 26, 26);
+}
+.language {
+  font-size: 0.8rem;
+  text-shadow: #4891be;
+  font-weight: bold;
+}
+.name {
+  font-size: 0.8rem;
+}
+.city {
+  font-size: 0.7rem;
+}
+.chatbtn {
+  padding: 20% 40%;
+  background-color: $text-primary;
+  border: none;
+  border-radius: 10%;
+  margin: 15% 0;
+  color: white;
+  font-size: 1.1rem;
+  &:hover {
+    background-color: $text-secondary;
+  }
+}
+.btnoptions {
+  @include flex(center, center);
+  flex-direction: row;
+  gap: 80%;
+}
+
+.favicon {
+  color: $backround;
+  size: 20rem;
+}
+//////////////////////////////////////////////USER PROFILE//////////////////////////////////////////////////////////
+#userProfile {
+ 
+  @include flex(flex-start, flex-start);
+  flex-direction: column;
+  .sidebar {
+    position: fixed;
+    left: 0;
+    width: 20%;
+    @include margin-top;
+    // @include flex(flex-start,center);
+    // flex-direction: column;
+    #side {
+      margin-top: 10%;
+      margin-left: 10%;
+
+      li {
+        margin-bottom: 5%;
+
+        a {
+          color: $text-primary;
+          &:hover {
+            color: $text-secondary;
+          }
+        }
+      }
+    }
+  }
+}
+
+#userData {
+  width: 50%;
+  @include flex(center, flex-start);
+  flex-direction: column;
+  margin: 2% 10%;
+  padding: 7%;
+  .flex-row {
+    @include flex(space-between, center);
+    flex-direction: row;
+  }
+  .profileimg {
+    @include flex(center, center);
+    width: 50%;
+  }
+  img {
+    width: 100%;
+    border-radius: 5%;
+    box-shadow: $box-shadow;
+  }
+  .name {
+    color: white;
+    text-shadow: $box-shadow;
+    font-size: 1.5rem;
+    margin-bottom: 5%;
+  }
+  .city {
+    color: white;
+    // text-shadow: $box-shadow;
+    font-size: 1.5rem;
+    // padding: 5%;
+  }
+
+  .language {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 5%;
+    font-weight: normal;
+    text-shadow: $box-shadow;
+  }
+}
+///////////////////////////////////////////////////////////////////FILTERS/////////////////////////////////////////
+#filters{
+  position: fixed;
+  top:25;
+  right: 0;
+}
+.filters {
+  .nativeFilter,
+  .practicingFilter {
+   
+    padding: 8%;
+    margin: 10%;
+    font-size: 0.8rem;
+    color: white;
+    font-weight: bolder;
+  }
+  .ul {
+    margin: 6%;
     
+   
+    li{
+      margin: 5% 0;
     }
   }
 }

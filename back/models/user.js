@@ -48,8 +48,11 @@ const User = sequelize.define("user_details", {
   practicing_language: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
-});
+  },
+  images: {
+    type: DataTypes.BLOB('long'),
+    allowNull: true,
+}});
 
 //   User.init({
 //     user_id: {
