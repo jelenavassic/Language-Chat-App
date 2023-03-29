@@ -1,5 +1,11 @@
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+
+const JWT_SECRET = process.env.JWT_SECRET ||  "languagechat";
+
+
 
 export const signup = async (req, res) => {
   const {
@@ -18,8 +24,8 @@ export const signup = async (req, res) => {
     if (user) {
       return res.status(400).json({ message: "Email already exists" });
     } else {
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
+    
+      const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new User({
         first_name,
         last_name,
@@ -30,10 +36,12 @@ export const signup = async (req, res) => {
         native_language,
         practicing_language,
       });
-
+      const token = jwt.sign({ email: newUser.email, id: newUser.user_id }, JWT_SECRET, {
+        expiresIn: "1h",
+      });
       await newUser.save();
 
-      res.status(201).json(newUser.toJSON());
+      return res.status(200).json({ result: newUser, token });
     }
   } catch (error) {
     console.error("Error creating user:", error);
@@ -58,7 +66,11 @@ export const singin = async (req, res) => {
     // console.log(res)
     // console.log(user)
 
-    return res.status(200).json({ message: "Logged in successfully" });
+    const token = jwt.sign({ email: user.email, id: user.user_id }, JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    return res.status(200).json({ result: user, token });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Internal server error" });

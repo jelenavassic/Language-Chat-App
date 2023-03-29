@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes } from "sequelize";
-
+import fs from 'fs';
 const sequelize = new Sequelize("mysql://root:@localhost:3306/languagechat", {
   define: {
     timestamps: false,
@@ -54,19 +54,7 @@ const User = sequelize.define("user_details", {
     allowNull: true,
 }});
 
-//   User.init({
-//     user_id: {
-//       type: DataTypes.INTEGER,
-//       autoIncrement: true,
-//       primaryKey: true
-//     }
-//   }, { sequelize });
 
-//   (async () => {
-//     await sequelize.sync({ force: true });
-//   })();
-
-// // User.sync({ alter: true })
 sequelize.sync();
 
 sequelize.define(

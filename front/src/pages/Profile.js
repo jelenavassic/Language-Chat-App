@@ -1,45 +1,32 @@
-import ProfileSidebar from "../components/ProfileSidebar";
-// import axios from "axios";
-// import API_URL from "../api";
-// import { useState, useEffect } from "react";
+import Favourites from "../components/Favourites";
 
 const Profile = () => {
-  // const [user, setUser] = useState([]);
-  // const { id } = 40;
-  // const getUser = async () => {
-  //   try {
-  //     const user = await axios.get(`${API_URL}/user/${id}`);
-  //     setUser(user.data);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
-  // useEffect(() => {
-  //   getUser();
-  // }, [user]);
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  const user = localUser.result;
+  const id = user.user_id;
 
   return (
     <div id="profile">
-      <section>
-       <ProfileSidebar></ProfileSidebar>
-      </section>
-      <section id= "myprofile">
-      {/* <div className="flex-row">
+      <section id="myprofile">
+        <div id="profileData">
           <div className="profileimg">
-            <img
-              src={`http://localhost:5000/api/images/${id}`}
-              alt={id}
-            ></img>
+            <img src={`./profile.jpg`} alt={id}></img>
           </div>
-          <div className="flex-column">
-            <div className="name">
+          <div className="w"> <h2>
+              <span className="l">Let's</span> 
+               <span className="ch"> chat!</span>
+            </h2></div>
+          <div className="name">
+            <div className="n">
               {user.first_name} {user.last_name}
             </div>
-            <div className="city">
-              {user.city}, {user.country}
-            </div>
+            <div className="l">Practicing: {user.practicing_language}</div>
           </div>
-        </div> */}
+        </div>
+
+        <div id="fav">
+          <Favourites></Favourites>
+        </div>
       </section>
     </div>
   );

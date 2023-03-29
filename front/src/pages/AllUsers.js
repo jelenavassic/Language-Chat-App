@@ -12,6 +12,12 @@ import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import ReactDOM from "react-dom";
 
 const AllUsers = () => {
+
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  const user = localUser.result;
+  const localId = user.user_id;
+
+
   const [users, setUsers] = useState([]);
 
   const getAllUsers = async () => {
@@ -41,7 +47,76 @@ const AllUsers = () => {
     const iconNode = ReactDOM.render(newIcon, document.createElement("div"));
     this.innerHTML = "";
     this.appendChild(iconNode);
+
+
+
+
+
+
+
+
+
+
+    
   }
+
+
+
+
+
+  // napraviti da u lokal storige se cuvaju samo podaci za ulogovanog korisnika koristeci lokalId
+  // let favourites
+  // const localStorageFav = localStorage.getItem("favourites");
+  // if (localStorageFav) {
+  //   cart = JSON.parse(localStorageFav);
+  // } else {
+  //   favourites = [];
+  // }????????????????????????????????????????????
+  
+
+//   function addToFavourites() {
+//     let id = this.dataset.id; //???????????????? da li moze ovako???
+//     users.forEach((element) => {
+//       let user_id = users.filter((elem) => elem.id == element.id)[0].user_id;
+//       let images = users.filter((elem) => elem.id == element.id)[0].images;
+//       let first_name = users.filter((elem) => elem.id == element.id)[0].first_name;
+//       let last_name = users.filter((elem) => elem.id == element.id)[0].last_name;
+//       let city = users.filter((elem) => elem.id == element.id)[0].city;
+//       let country = users.filter((elem) => elem.id == element.id)[0].country;
+//       let native_language = users.filter((elem) => elem.id == element.id)[0].native_language;
+//       let practicing_language = users.filter((elem) => elem.id == element.id)[0].practicing_language;
+
+// let item = {
+//   user_id: user_id,
+//       images:images,
+//       first_name:first_name,
+//       last_name:last_name,
+//       city:city,
+//       country:country,
+//       native_language:native_language,
+//       practicing_language:practicing_language
+
+//     };
+//     if (cart.some((elem) => elem.user_id !== id))
+   
+// {    favourites.push(item);}
+    
+//     localStorage.setItem("favourites", JSON.stringify(favourites));
+
+
+//     }
+//   }
+
+
+
+
+
+    
+
+
+
+
+
   return (
     <div id="users">
       <section className="sidebar">

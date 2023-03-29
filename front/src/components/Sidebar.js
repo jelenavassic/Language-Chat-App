@@ -1,8 +1,14 @@
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
+  function logout(){
+    localStorage.removeItem("user");
+    window.location.reload(false);
+
+  }
   return (
     <div>
+      <div className="sidebar">
       <ul id="side">
         <li>
           <NavLink to="/">About</NavLink>
@@ -10,16 +16,15 @@ const Sidebar = () => {
         <li>
           <NavLink to="/myprofile">My Profile</NavLink>
         </li>
-        <li>
-          <NavLink to="/Favourites">Favourites</NavLink>
-        </li>
+
         <li>
           <NavLink to="/AllUsers">Find a partner</NavLink>
         </li>
-        <li>
+        <li onClick={logout}>
           <NavLink to="/login">Log out</NavLink>
         </li>
       </ul>
+    </div>
     </div>
   );
 };

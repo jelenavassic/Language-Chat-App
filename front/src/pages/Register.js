@@ -49,7 +49,7 @@ const Register = () => {
   const register = async (newUser) => {
     try {
       await axios.post(`${API_URL}/singup`, newUser).then(function (res) {
-        if (res.status === 201) {
+        if (res.status === 200) {
           history("/login");
         }
       });

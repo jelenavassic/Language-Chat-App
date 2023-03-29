@@ -20,6 +20,8 @@ const UserProfile = () => {
     getUser();
   }, [id]);
 
+
+
   return (
     <div id="userProfile">
       <section className="sidebar">
