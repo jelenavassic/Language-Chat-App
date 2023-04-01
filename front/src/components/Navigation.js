@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 
 const Navigation = () => {
-  function logout(){
+  function logout() {
     localStorage.removeItem("user");
     window.location.reload(false);
   }
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <div id="header">
       <div className="logo">
@@ -20,51 +20,35 @@ const Navigation = () => {
         </NavLink>
       </div>
 
-{
+      {user ? (
+        <ul className="nav navgap">
+          <li>
+            <NavLink to="/">About</NavLink>
+          </li>
+          <li>
+            <NavLink to="/myprofile">My Profile</NavLink>
+          </li>
 
-  user ? <ul className="nav navgap">
-  <li>
-    <NavLink to="/">About</NavLink>
-  </li>
-  <li>
-    <NavLink to="/myprofile">My Profile</NavLink>
-  </li>
- 
-  <li>
-    <NavLink to="/AllUsers">Find a partner</NavLink>
-  </li>
-  <li onClick={logout}>
-    <NavLink to="/login">Log out</NavLink>
-  </li>
-</ul>:    <ul className="nav">
-        <li>
-          <NavLink to="/">About</NavLink>
-        </li>
-        <li>
-          <NavLink to="/register">Sing Up</NavLink>
-        </li>
-        <li >
-          <NavLink to="/login">Log in</NavLink>
-        </li>
-      </ul>
-    
-}
-
-
-
-
-{/* 
-      <ul className="nav">
-        <li>
-          <NavLink to="/">About</NavLink>
-        </li>
-        <li>
-          <NavLink to="/register">Sing Up</NavLink>
-        </li>
-        <li>
-          <NavLink to="/login">Log in</NavLink>
-        </li>
-      </ul> */}
+          <li>
+            <NavLink to="/AllUsers">Find a partner</NavLink>
+          </li>
+          <li onClick={logout}>
+            <NavLink to="/login">Log out</NavLink>
+          </li>
+        </ul>
+      ) : (
+        <ul className="nav">
+          <li>
+            <NavLink to="/">About</NavLink>
+          </li>
+          <li>
+            <NavLink to="/register">Sing Up</NavLink>
+          </li>
+          <li>
+            <NavLink to="/login">Log in</NavLink>
+          </li>
+        </ul>
+      )}
     </div>
   );
 };

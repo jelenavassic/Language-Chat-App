@@ -2,14 +2,11 @@ import React from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import API_URL from "../api";
-import { useState  } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import AllUsers from "./AllUsers";
 
 const Login = () => {
-
-  
-  
   const [user, loginUser] = useState({
     email: "",
     password: "",
@@ -20,36 +17,28 @@ const Login = () => {
     try {
       await axios.post(`${API_URL}/singin`, user).then(function (res) {
         if (res.status === 200) {
-          // console.log(res);
-          // alert(res.data.message);
-      
           history("/myprofile");
           localStorage.setItem("user", JSON.stringify(res.data));
-          
         }
       });
     } catch (error) {
       console.log(error);
       let er = document.getElementById("errorLogin");
       er.style.display = "block";
-      
     }
   };
-
-
 
   const handleChange = (e) => {
     e.preventDefault();
     try {
       if (user.email !== "" && user.password !== "") {
         login(user);
-       
       }
     } catch (error) {
       console.log(error);
     }
   };
- 
+
   return (
     <div id="login">
       <div className="form">
@@ -81,15 +70,15 @@ const Login = () => {
             </div>
           </div>
           <div>
-            <button type="submit" className="submit" >
+            <button type="submit" className="submit">
               Log in
             </button>
           </div>
           <div>
- 
-            <NavLink to="/register"><span className="ch"> Don't have an account? </span>
-              <span className="l">Sign up</span></NavLink>
-          
+            <NavLink to="/register">
+              <span className="ch"> Don't have an account? </span>
+              <span className="l">Sign up</span>
+            </NavLink>
           </div>
         </form>
       </div>

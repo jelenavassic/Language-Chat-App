@@ -27,10 +27,10 @@ const Register = () => {
       .matches(/^[A-Z][a-z]*$/, "Must start with an uppercase letter")
       .required("Required"),
     city: Yup.string()
-    .matches(/^[A-Z][a-z]*$/, "Must start with an uppercase letter")
+      .matches(/^[A-Z][a-z]*$/, "Must start with an uppercase letter")
       .required("Required"),
     country: Yup.string()
-    .matches(/^[A-Z][a-z]*$/, "Must start with an uppercase letter")
+      .matches(/^[A-Z][a-z]*$/, "Must start with an uppercase letter")
       .required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
     password: Yup.string()
@@ -59,7 +59,6 @@ const Register = () => {
       let er = document.getElementById("errorReg");
       er.style.display = "block";
       setFormErrors({});
-
     }
   };
 
@@ -72,9 +71,6 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
-
 
     try {
       await registrationSchema.validate(formData, { abortEarly: false });
@@ -150,10 +146,10 @@ const Register = () => {
                 ></input>
               </div>
               {formErrors.password && (
-              <div className="errorM">{formErrors.password}</div>
-            )}
+                <div className="errorM">{formErrors.password}</div>
+              )}
             </div>
-            
+
             <div className="input">
               <div className="formDiv">
                 <label htmlFor="city">City:</label>
@@ -207,8 +203,8 @@ const Register = () => {
                 ></input>
               </div>
               {formErrors.practicing_language && (
-                  <div className="errorM">{formErrors.practicing_language}</div>
-                )}
+                <div className="errorM">{formErrors.practicing_language}</div>
+              )}
             </div>
           </div>
           <div>

@@ -20,8 +20,6 @@ const UserProfile = () => {
     getUser();
   }, [id]);
 
-
-
   return (
     <div id="userProfile">
       <section className="sidebar">
@@ -50,6 +48,9 @@ const UserProfile = () => {
             Native language: {user.native_language}
           </div>
           <div className="language">Practicing: {user.practicing_language}</div>
+        </div>
+        <div>
+          <button>Add to favoutites</button>
         </div>
       </section>
     </div>
