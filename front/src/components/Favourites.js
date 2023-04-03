@@ -5,12 +5,11 @@ import API_URL from "../api";
 import { NavLink } from "react-router-dom";
 
 const Favourites = () => {
-  const localUser = JSON.parse(localStorage.getItem("user"));
-  const user = localUser.result;
-  const localId = user.user_id;
-  const localStorageFav = localStorage.getItem(`favourites${localId}`);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const id = user.user_id;
+  const localStorageFav = localStorage.getItem(`favourites${id}`);
   const favourites = localStorageFav ? JSON.parse(localStorageFav) : [];
-  console.log(favourites);
+  // console.log(favourites);
   const [users, setUsers] = useState([]);
   const getAllUsers = async () => {
     try {
@@ -34,16 +33,19 @@ const Favourites = () => {
       );
       setFavouritesArr(mappedFavourites);
     }
-  }, [users, favourites]); //ako je prazan niz  ne ubacuje nista u favARR
+  }, [users]); //ako je prazan niz  ne ubacuje nista u favARR
 
+
+
+
+  
   console.log(favourites);
   console.log(favouritesArr);
 
-  function removeFav(id) {
-    let newfavourites = favourites.filter((element) => element != id);
-    localStorage.setItem(`favourites${localId}`, JSON.stringify(newfavourites));
+  function removeFav(removeId) {
+    let newfavourites = favourites.filter((element) => element != removeId);
+    localStorage.setItem(`favourites${id}`, JSON.stringify(newfavourites));
 
-    // alert(id)
   }
 
   return (

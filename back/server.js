@@ -2,6 +2,9 @@ import mysql from "mysql";
 import express from "express"
 import cors from "cors"
 import router from "./routes/routes.js";
+import bodyParser from 'body-parser';
+
+
 
 
 //server
@@ -15,7 +18,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors())
 app.use("/api/",router)
+app.use(bodyParser.json({ limit: '1mb' }));
+app.use(bodyParser.urlencoded({ limit: '1mb', extended: true }));
+
 //baza
+
+
 
 const con = mysql.createConnection({
     host: "localhost",

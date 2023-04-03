@@ -46,10 +46,7 @@ body {
   // box-shadow: $box-shadow;
 }
 #notFound {
-  // width: 100vw;
-  // height: 100vh;
-  @include flex(center, center);
-  padding: 7%;
+  margin: 0 auto;
 }
 .notFound {
   height: 80%;
@@ -106,20 +103,21 @@ body {
   @include flex(flex-start, center);
   flex-direction: column;
   margin-top: 10vh;
-  color: white;
+  color: $text-primary;
   #proverb {
+    color: $text-secondary;
     margin-top: 8%;
     @include flex(center, center);
     flex-direction: column;
     h2 {
-      text-shadow: 0.5px 0.5px rgb(1, 1, 1);
+      // text-shadow: 0.5px 0.5px rgb(1, 1, 1);
       font-style: italic;
       margin-bottom: 1%;
     }
     h4 {
       font-style: italic;
       font-weight: normal;
-      text-shadow: 0.5px 0.5px rgb(32, 31, 31);
+      // text-shadow: 0.5px 0.5px rgb(32, 31, 31);
     }
   }
   .sections {
@@ -129,7 +127,7 @@ body {
     height: 100rem;
 
     p {
-      text-shadow: 0.5px 0.5px rgb(81, 78, 78);
+      text-shadow: 0.2px 0.2px rgb(81, 78, 78);
       line-height: 3.2rem;
       font-style: italic;
     }
@@ -157,14 +155,14 @@ body {
         @include flex(center, center);
         padding: 10%;
         font-size: 1.3rem;
-        font-weight: bolder;
+        // font-weight: bolder;
         .l {
           color: $text-primary;
-          // font-weight: bolder;
+          font-weight: bold;
         }
         .ch {
           color: $text-secondary;
-          // font-weight: bolder;
+          font-weight: bold;
         }
       }
     }
@@ -350,6 +348,12 @@ body {
   }
 }
 ///////////////////////////////////////////ALL USERS//////////////////////////////////////////////
+#notFound {
+  margin-top: 10%;
+  width: 50%;
+  font-size: 2rem;
+  color: $text-primary;
+}
 #profile,
 #edit,
 #users,
@@ -412,7 +416,7 @@ body {
 }
 
 .user {
-          background-color: white;
+  background-color: white;
 
   width: 23%;
   border-radius: 2%;
@@ -493,10 +497,11 @@ body {
 #userProfile {
   @include flex(flex-start, flex-start);
   flex-direction: column;
+  height: 90vh;
 }
 
 #userData {
-  width: 50%;
+  width: 40%;
   @include flex(center, flex-start);
   flex-direction: column;
   margin: 2% 10%;
@@ -508,7 +513,7 @@ body {
   }
   .profileimg {
     @include flex(center, center);
-    width: 50%;
+    width: 70%;
   }
   img {
     width: 100%;
@@ -518,22 +523,26 @@ body {
   .name {
     // color: white;
     // text-shadow: $box-shadow;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     margin-bottom: 5%;
+    font-weight: bold;
   }
   .city {
     // color: white;
     // text-shadow: $box-shadow;
-    font-size: 1.5rem;
+    font-size: 1rem;
     // padding: 5%;
   }
 
   .language {
     // color: white;
-    font-size: 1.5rem;
-    margin-bottom: 5%;
-    font-weight: normal;
-    text-shadow: $box-shadow;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 2%;
+    // font-weight: normal;
+  }
+  .favbtn {
+    padding: 10%;
   }
 }
 
@@ -606,7 +615,7 @@ body {
       flex-direction: row;
       .w {
         color: white;
-        font-size: 2rem;
+        font-size: 1.5rem;
         .l {
           color: $text-primary;
         }
@@ -645,10 +654,12 @@ body {
     }
   }
   #fav {
+    // background-color: #125d8b;
     .fav {
+      // background-color: yellow;
       @include flex(center, stretch);
       flex-direction: row;
-      width: 100%;
+      width: 90vw;
       margin: 0 10%;
 
       .mainFav {
@@ -666,7 +677,11 @@ body {
         .favourites {
           color: white;
           margin-top: 10%;
+          font-size: 1.5rem;
+          text-shadow: $box-shadow;
+          font-weight: bold;
           a {
+            // font-weight: bold;
             color: $text-secondary;
 
             font-weight: bold;
@@ -717,6 +732,86 @@ body {
           }
         }
       }
+    }
+  }
+  #myProfileMain {
+    height: 100%;
+    width: 100%;
+    @include flex(center, center);
+    flex-direction: row;
+  }
+}
+/////////////////////////////////////////////////////////////CHAT//////////////////////////////
+.chat {
+  width: 40%;
+  height: 70%;
+  background-color: white;
+  border: solid 1px $text-primary;
+  position: fixed;
+  bottom: 5%;
+  right: 6%;
+}
+
+//////////////////////////////////////////////////EDIT///////////////////////////////////
+.mainEdit {
+  color: $text-primary;
+  font-weight: bolder;
+  width: 60vw;
+  height: 60vh;
+  // background-color: blue;
+  margin-top: 20%;
+  padding: 2%;
+  @include flex(center, center);
+  flex-direction: row;
+  
+  gap: 5%;
+  .editPhoto {
+    height: 100%;
+    // background-color: red;
+    width: 60%;
+    @include flex(flex-start, flex-start);
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    img {
+      width: 90%;
+    }
+  }
+
+  .editData {
+    width: 100%;
+    // background-color: orange;
+    @include flex(space-between, flex-end);
+    flex-direction: column;
+    // padding: 5%;
+    .formDiv {
+      @include flex(space-between, flex-end);
+
+      margin-bottom: 4%;
+    }
+  }
+
+  button {
+    color: white;
+    padding: 3%;
+    background-color: $text-primary;
+    border: none;
+    border-radius: 10%;
+    margin-top: 7%;
+    &:hover {
+      background-color: $text-secondary;
+    }
+  }
+  .button {
+    color: white;
+    margin-top: 15%;
+    padding: 3%;
+    background-color: darkred;
+    border: none;
+    border-radius: 10%;
+
+    &:hover {
+      background-color: red;
     }
   }
 }

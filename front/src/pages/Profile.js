@@ -1,20 +1,46 @@
+import { useState, useEffect } from "react";
 import Favourites from "../components/Favourites";
+import axios from "axios";
+import API_URL from "../api";
+import Chat from "../components/Chat";
+
+
 
 const Profile = () => {
+  // window.location.reload(false);
   const localUser = JSON.parse(localStorage.getItem("user"));
-  const user = localUser.result;
-  const id = user.user_id;
-  // console.log(users)
+  const id = localUser.user_id;
 
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const user = await axios.get(`${API_URL}/user/${id}`);
+        setUser(user.data);
+        localStorage.setItem("user", JSON.stringify(user.data));
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getUser();
+  }, [id]);
+console.log("DGAGDA")
   return (
     <div id="profile">
       <section id="myprofile">
         <div id="profileData">
-          <div className="profileimg">
-            <img src={`./profile.jpg`} alt={id}></img>
+          <div className="profileimg"> {user.images===null ?<img src={`./profile.jpg`} alt={id}></img> :  <img
+              src={`http://localhost:5000/api/images/${user.user_id}`}
+              alt={user.user_id}
+            ></img>} 
+            {/* <img src={`./profile.jpg`} alt={id}></img> */}
+           
           </div>
+        
           <div className="w">
-            {" "}
+          
             <h2>
               <span className="l">My </span>
               <span className="ch"> favourites</span>
@@ -27,9 +53,11 @@ const Profile = () => {
             <div className="l">Practicing: {user.practicing_language}</div>
           </div>
         </div>
-
-        <div id="fav">
-          <Favourites></Favourites>
+        <div id="myProfileMain">
+          <div id="fav">
+            <Favourites></Favourites>
+          </div>
+          <div className="chat"> <Chat></Chat></div>
         </div>
       </section>
     </div>
@@ -38,38 +66,3 @@ const Profile = () => {
 
 export default Profile;
 
-// const [users, setUsers] = useState([]);
-// const getAllUsers = async () => {
-//   try {
-//     const users = await axios.get(`${API_URL}/AllUsers`);
-//     setUsers(users.data);
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
-
-// useEffect(() => {
-//   getAllUsers();
-// }, []);
-
-// const [favouritesArr, setfavouritesArr] = useState([]);
-// console.log(users)
-// const getFavouritesArr= async () => {
-//   try {
-//     const user = await favourites.map((element) => {
-//       return users.find((elem) => elem.user_id == element);
-
-//     });
-
-//     setfavouritesArr(user); //undefined
-//   } catch (error) {
-//     console.log(error.message);
-//   }}
-
-// useEffect(() => {
-//   getFavouritesArr()
-
-// }, [])
-
-// console.log(favourites)
-// console.log(favouritesArr)

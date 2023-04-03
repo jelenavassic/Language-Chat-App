@@ -10,19 +10,23 @@ import ReactDOM from "react-dom";
 
 const AllUsers = () => {
   const localUser = JSON.parse(localStorage.getItem("user"));
-  const user = localUser.result;
-  const localId = user.user_id;
+  // const user = localUser.result;
+  const localId = localUser.user_id;
   const localStorageFav = localStorage.getItem(`favourites${localId}`);
   const favourites = localStorageFav ? JSON.parse(localStorageFav) : [];
   let native_languageArr = [];
   let practicing_languageArr = [];
 
   const [users, setUsers] = useState([]);
+//  let [filteredUsers, setFilteredUsers] = useState([]);
+
+
 
   const getAllUsers = async () => {
     try {
       const users = await axios.get(`${API_URL}/AllUsers`);
       setUsers(users.data);
+      // setFilteredUsers(users.data);
     } catch (error) {
       console.log(error.message);
     }
@@ -31,7 +35,8 @@ const AllUsers = () => {
   useEffect(() => {
     getAllUsers();
   }, []);
-  // console.log(users)
+
+  
   function renderFilters() {
     users.forEach((element) => {
       if (!native_languageArr.includes(element.native_language)) {
@@ -46,6 +51,48 @@ const AllUsers = () => {
     });
   }
 
+ 
+
+
+  function handleFilterChangeNative(e){
+
+    const language = e.target.value;
+
+
+  //   filteredUsers ?  filteredUsers = filteredUsers.filter(
+  //     user =>
+  //  user.native_language === language
+  //   ) : 
+    let filteredUsers = users.filter(
+      user =>
+   user.native_language === language
+    );
+
+    setUsers(filteredUsers);
+    console.log(filteredUsers)
+    // setFilteredUsers(filteredUsers);
+  }
+
+  function handleFilterChangePracticing(e){
+
+    const language = e.target.value;
+  
+
+  //   filteredUsers ?  filteredUsers = filteredUsers.filter(
+  //     user =>
+  //  user.practicing_language === language
+  //   ) : 
+  let   filteredUsers = users.filter(
+      user =>
+   user.practicing_language === language
+    );
+    setUsers(filteredUsers);
+    console.log(filteredUsers)
+    // setFilteredUsers(filteredUsers);
+  }
+
+
+
   function addToFavourites(id) {
     const newIcon = (
       <div>
@@ -56,17 +103,21 @@ const AllUsers = () => {
     const iconElement = document.getElementById(`favicon-${id}`);
     iconElement.innerHTML = "";
     iconElement.appendChild(iconNode);
-
+//
     let user = users.find((elem) => elem.user_id == id); // ostaviti 2 ==  jer je id koji stize string
-    console.log(user);
+ 
     // console.log(favourites);
+    //
     if (!favourites.some((elem) => elem == user.user_id)) {
-      console.log(favourites);
+      // console.log(favourites);
       favourites.push(user.user_id); // nema mesta za sve podatke iz usera
     }
     localStorage.setItem(`favourites${localId}`, JSON.stringify(favourites));
   }
   renderFilters();
+
+
+
   return (
     <div id="users">
       <section className="sidebar">
@@ -75,11 +126,14 @@ const AllUsers = () => {
       <section className="main">
         <div id="usersmain">
           <div id="allusers">
-            {users.map((element) => {
+        
+            {users.length < 1 ? <div id="notFound"><div >No users found.</div></div> :
+            users.map((element) => {
               const id = `${element.user_id}`;
               const username = `${element.first_name}`;
 
               return (
+                // !element==user &&
                 <div className="user flex-column" key={element.user_id}>
                   <div className="flex-row">
                     <div className="profileimg">
@@ -164,7 +218,7 @@ const AllUsers = () => {
                   {native_languageArr.map((element) => (
                     <li key={element}>
                       <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" value={element} onChange={handleFilterChangeNative}/>
                         {element}
                       </label>
                     </li>
@@ -180,7 +234,7 @@ const AllUsers = () => {
                   {practicing_languageArr.map((element) => (
                     <li key={element}>
                       <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" value={element} onChange={handleFilterChangePracticing} />
                         {element}
                       </label>
                     </li>
@@ -196,5 +250,4 @@ const AllUsers = () => {
 };
 
 export default AllUsers;
-
 

@@ -3,6 +3,7 @@ import axios from "axios";
 import API_URL from "../api";
 import Sidebar from "../components/Sidebar";
 import { useParams } from "react-router-dom";
+import Chat from "../components/Chat";
 
 const UserProfile = () => {
   const [user, setUser] = useState({});
@@ -19,6 +20,10 @@ const UserProfile = () => {
     };
     getUser();
   }, [id]);
+
+console.log(user)
+
+
 
   return (
     <div id="userProfile">
@@ -49,9 +54,10 @@ const UserProfile = () => {
           </div>
           <div className="language">Practicing: {user.practicing_language}</div>
         </div>
-        <div>
-          <button>Add to favoutites</button>
-        </div>
+       
+      </section>
+      <section className="chat">
+  <Chat></Chat>
       </section>
     </div>
   );

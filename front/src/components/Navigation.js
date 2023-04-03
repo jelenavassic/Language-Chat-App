@@ -6,6 +6,7 @@ const Navigation = () => {
     window.location.reload(false);
   }
   const user = JSON.parse(localStorage.getItem("user"));
+  
   return (
     <div id="header">
       <div className="logo">

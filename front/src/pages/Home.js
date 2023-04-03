@@ -18,7 +18,7 @@ const Home = () => {
               Practice a language, explore new cultures, and make friends around
               the world for free!The best way to learn a language is to actually
               use it! <span className="l">Language</span>
-              <span className="ch"> Chat </span>helps you to connect with native
+              <span className="ch">Chat </span>helps you to connect with native
               speakers and chat with them for free.
             </p>
           </div>

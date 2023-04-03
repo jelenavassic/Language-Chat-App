@@ -4,9 +4,10 @@ import { NavLink } from "react-router-dom";
 import API_URL from "../api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import AllUsers from "./AllUsers";
+
 
 const Login = () => {
+
   const [user, loginUser] = useState({
     email: "",
     password: "",
@@ -17,8 +18,9 @@ const Login = () => {
     try {
       await axios.post(`${API_URL}/singin`, user).then(function (res) {
         if (res.status === 200) {
-          history("/myprofile");
-          localStorage.setItem("user", JSON.stringify(res.data));
+          localStorage.setItem("user", JSON.stringify(res.data.result));
+           history("/myProfile");
+           window.location.reload(false);
         }
       });
     } catch (error) {
