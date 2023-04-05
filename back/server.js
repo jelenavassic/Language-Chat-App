@@ -1,90 +1,99 @@
 import mysql from "mysql";
-import express from "express"
-import cors from "cors"
+import express from "express";
+import http from "http";
+import cors from "cors";
 import router from "./routes/routes.js";
-import bodyParser from 'body-parser';
-
-
-
+import { Server } from "socket.io";
 
 //server
-const app= express();
-const PORT=process.env.PORT || 5000
-app.listen(PORT,()=>{
-    console.log("Server running on port 5000")
-})
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, { cors: { origin: "*" } });
+const PORT = 5000;
+server.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
+// io.origins((origin, callback) => {
+//   if (origin !== "https://foo.example.com") {
+//     return callback("origin not allowed", false);
+//   }
+//   callback(null, true);
+// });
+
+
+
+
+
+//CORS
+app.use((req, res, next) => {
+  res.append("Access-Control-Allow-Origin", ["*"]);
+  res.append("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+  res.append("Access-Control-Allow-Headers", "*");
+  next();
+});
+
+// const PORT=process.env.PORT || 5000
+// const server=app.listen(PORT,()=>{
+//     console.log("Server running on port 5000")
+// })
+
+// app.get('/api', (req, res) => {
+//   res.json({
+//     message: 'Hello world',
+//   });
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors())
-app.use("/api/",router)
-app.use(bodyParser.json({ limit: '1mb' }));
-app.use(bodyParser.urlencoded({ limit: '1mb', extended: true }));
+app.use(cors());
+app.use("/api/", router);
+// app.use(bodyParser.json({ limit: '1mb' }));
+// app.use(bodyParser.urlencoded({ limit: '1mb', extended: true }));
+
+// const httpServer = createServer(server);
+// const io = new Server(server, { cors: { origin: 'http://localhost:5000' } });
 
 //baza
-
-
-
 const con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "languagechat",
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "languagechat",
+});
+
+con.connect(function (err) {
+  if (err) throw err;
+  console.log("Connected to database");
+});
+
+
+
+io.on("connection", (socket) => {
+  // console.log("A user connected!");
+  // Listen for incoming requests to join a private chat room
+  socket.on("join private chat", (privateChatRoomId) => {
+    // Check if the user is authorized to join the private chat room
+
+    // Join the user to the private chat room
+    socket.join(privateChatRoomId);
+    console.log("A user connected! to private");
   });
-  
-  con.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected to database");
+  // Listen for incoming private chat messages
+  socket.on("private chat message", (privateChatRoomId, message) => {
+    // Broadcast the message to the two users in the private chat room
+    console.log(`Received message in room ${privateChatRoomId}: ${message.message}`);
+
+    socket.to(privateChatRoomId).emit("private chat message", message);
   });
 
-  //CORS
-  app.use((req, res, next) => {
-    res.append("Access-Control-Allow-Origin", ["*"]);
-    res.append("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
-    res.append("Access-Control-Allow-Headers", "Content-Type");
-    next();
+  socket.on("typing", (privateChatRoomId,user) => {
+    socket.to(privateChatRoomId).emit("typing",user);
   });
-  // app.use(cors())
 
-
-  app.get("/allUsers",function(req,res){
-    con.query("select * from user_details", function(err,result,field){
-        if(result.length>0){
-            if(err) throw err;
-            res.json({
-               
-                result: "ok",
-                data: result  
-            })
-            
-        }else{
-            res.json({
-                result:"No users"
-            })
-        }
-
-    })
-  })
-
-
-  // const user = {
-  //   first_name: 'John',
-  //   last_name: 'Doe',
-  //   city: 'New York',
-  //   country: 'USA',
-  //   email: 'johndoe@example.com',
-  //   password: 'password',
-  //   native_language: 'English',
-  //   practicing_language: 'Spanish'
-  // };
-  
-  // const sql = 'INSERT INTO user_details SET ?';
-  
-  // con.query(sql, user, (err, result) => {
-  //   if (err) {
-  //     console.error('Error inserting data:', err);
-  //     return;
-  //   }
-  //   console.log('Data inserted successfully');
-  // });
-  
+  socket.on("stopTyping", (privateChatRoomId) => {
+    socket.to(privateChatRoomId).emit("stopTyping");
+  });
+});
+// server.listen(PORT, () => {
+//   console.log(`Server started on port ${PORT}`);
+// });

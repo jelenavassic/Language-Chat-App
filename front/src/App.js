@@ -10,7 +10,8 @@ import AllUsers from "./pages/AllUsers";
 import Edit from "./pages/Edit";
 import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
-
+import Chatroom from "./pages/Chatroom";
+ 
 function App() {
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/myprofile" element={<Profile></Profile>}></Route>
                 <Route path="/editProfile" element={<Edit></Edit>}></Route>
                 <Route path="/AllUsers" element={<AllUsers></AllUsers>}></Route>
+                <Route path="/chat" element={<Chatroom></Chatroom>}></Route>
                 <Route
                   path="/user/:id"
                   element={<UserProfile></UserProfile>}

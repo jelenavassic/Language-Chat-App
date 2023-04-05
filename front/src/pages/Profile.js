@@ -57,7 +57,7 @@ console.log("DGAGDA")
           <div id="fav">
             <Favourites></Favourites>
           </div>
-          <div className="chat"> <Chat></Chat></div>
+          {/* <div className="chat"> <Chat></Chat></div> */}
         </div>
       </section>
     </div>
