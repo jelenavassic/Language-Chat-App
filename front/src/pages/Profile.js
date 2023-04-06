@@ -2,15 +2,12 @@ import { useState, useEffect } from "react";
 import Favourites from "../components/Favourites";
 import axios from "axios";
 import API_URL from "../api";
-import Chat from "../components/Chat";
-
-
+import { NavLink } from "react-router-dom";
 
 const Profile = () => {
   // window.location.reload(false);
   const localUser = JSON.parse(localStorage.getItem("user"));
   const id = localUser.user_id;
-
 
   const [user, setUser] = useState({});
 
@@ -26,21 +23,25 @@ const Profile = () => {
     };
     getUser();
   }, [id]);
-console.log("DGAGDA")
+
   return (
     <div id="profile">
       <section id="myprofile">
         <div id="profileData">
-          <div className="profileimg"> {user.images===null ?<img src={`./profile.jpg`} alt={id}></img> :  <img
-              src={`http://localhost:5000/api/images/${user.user_id}`}
-              alt={user.user_id}
-            ></img>} 
+          <div className="profileimg">
+            {" "}
+            {user.images === null ? (
+              <img src={`./profile.jpg`} alt={id}></img>
+            ) : (
+              <img
+                src={`http://localhost:5000/api/images/${user.user_id}`}
+                alt={user.user_id}
+              ></img>
+            )}
             {/* <img src={`./profile.jpg`} alt={id}></img> */}
-           
           </div>
-        
+
           <div className="w">
-          
             <h2>
               <span className="l">My </span>
               <span className="ch"> favourites</span>
@@ -51,6 +52,7 @@ console.log("DGAGDA")
               {user.first_name} {user.last_name}
             </div>
             <div className="l">Practicing: {user.practicing_language}</div>
+            <div id="edit"> <NavLink to="/editProfile">Edit Profile</NavLink></div>
           </div>
         </div>
         <div id="myProfileMain">
@@ -65,4 +67,3 @@ console.log("DGAGDA")
 };
 
 export default Profile;
-

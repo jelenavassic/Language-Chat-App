@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes } from "sequelize";
-import fs from 'fs';
+// import fs from 'fs';
 const sequelize = new Sequelize("mysql://root:@localhost:3306/languagechat", {
   define: {
     timestamps: false,

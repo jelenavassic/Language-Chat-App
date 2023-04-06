@@ -4,6 +4,7 @@ import http from "http";
 import cors from "cors";
 import router from "./routes/routes.js";
 import { Server } from "socket.io";
+import ChatMessages from "./models/chat.js";
 
 //server
 const app = express();
@@ -79,12 +80,42 @@ io.on("connection", (socket) => {
     console.log("A user connected! to private");
   });
   // Listen for incoming private chat messages
-  socket.on("private chat message", (privateChatRoomId, message) => {
-    // Broadcast the message to the two users in the private chat room
-    console.log(`Received message in room ${privateChatRoomId}: ${message.message}`);
+  // socket.on("private chat message", (privateChatRoomId, message) => {
+  //   // Broadcast the message to the two users in the private chat room
+  //   console.log(`Received message in room ${privateChatRoomId}: ${message.message}`);
 
-    socket.to(privateChatRoomId).emit("private chat message", message);
+  //   socket.to(privateChatRoomId).emit("private chat message", message);
+  // });
+  socket.on("private chat message", async (privateChatRoomId,data) => {
+    try {
+      const {  sender, message,senderId,receiver } = data;
+      const chatMessage = await ChatMessages.create({
+        conversationId: privateChatRoomId,
+        sender:sender+senderId,
+        message,
+        senderId,
+        receiver,
+      });
+      console.log("Message saved to database:", chatMessage);
+
+
+      console.log(privateChatRoomId)
+      socket.to(privateChatRoomId).emit("private chat message", data);
+    } catch (error) {
+      console.error(error);
+    }
+
+  
+
   });
+
+
+
+
+
+
+
+
 
   socket.on("typing", (privateChatRoomId,user) => {
     socket.to(privateChatRoomId).emit("typing",user);

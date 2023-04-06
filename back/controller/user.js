@@ -1,8 +1,8 @@
 import User from "../models/user.js";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import fs from "fs";
+// import fs from "fs";
 
 
 const JWT_SECRET = process.env.JWT_SECRET || "languagechat";
@@ -24,7 +24,7 @@ export const signup = async (req, res) => {
     if (user) {
       return res.status(400).json({ message: "Email already exists" });
     } else {
-      const hashedPassword = await bcrypt.hash(password, 10);
+      // const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new User({
         first_name,
         last_name,

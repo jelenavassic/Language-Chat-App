@@ -549,8 +549,8 @@ body {
   .addFav {
     margin-top: 10%;
     padding: 5%;
-
-    box-shadow: $box-shadow;
+color:white;
+    // box-shadow: $box-shadow;
     border: none;
     border-radius: 5%;
     background-color: $text-primary;
@@ -671,8 +671,23 @@ body {
           font-weight: bold;
         }
       }
+      #edit{
+        font-size: 1rem;
+        margin-top:10%;
+        a{
+          color:$text-primary;
+          text-decoration: underline
+        
+        }
+        a:hover{
+            color: $text-secondary
+        }
+    
+
+      }
     }
   }
+  //////////////////////////////////////FAVOURITES///////////////////////////////
   #fav {
     // background-color: #125d8b;
     .fav {
@@ -684,7 +699,7 @@ body {
 
       .mainFav {
         // background-color: red;
-        width: 100%;
+        width: 90%;
         // height: 20%;
         @include flex(center, center);
         flex-direction: column;
@@ -733,10 +748,13 @@ body {
           }
         }
       }
+      .user  {
+        color:$text-primary;
+      }
       .sideb {
         // background-color: black;
         width: 20%;
-        margin-left: 6%;
+        margin-left: 8%;
         padding: 1%;
         ul {
           @include flex(center, flex-start);
@@ -899,9 +917,12 @@ width: 50%;
     margin: 2%;
   }
   #feedback {
-    position: absolute;
-    bottom: 7%;
-   float: right;
+// align-self: flex-end;    
+position:fixed;
+bottom: 11%;
+   float: left;
+  //  overflow: hidden;
+
   }
 }
 #input_zone {
@@ -922,6 +943,7 @@ width: 50%;
   #send_message {
     height: 100%;
   }
+  
 }
 // #chatroom::-webkit-scrollbar {
 //   width: 10px;

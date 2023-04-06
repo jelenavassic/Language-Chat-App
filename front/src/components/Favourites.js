@@ -11,6 +11,30 @@ const Favourites = () => {
   const favourites = localStorageFav ? JSON.parse(localStorageFav) : [];
   // console.log(favourites);
   const [users, setUsers] = useState([]);
+  const [allMessages, setMessages] = useState([]);
+
+  const getMessages = async () => {
+    try {
+      const chatMessages = await axios
+        .get(`${API_URL}/messages`)
+        .then((response) => {
+          setMessages(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      console.log(chatMessages);
+      // setMessage(chatMessages);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getMessages();
+  }, [id]);
+
+  // console.log(allMessages);
   const getAllUsers = async () => {
     try {
       const users = await axios.get(`${API_URL}/AllUsers`);
@@ -35,23 +59,41 @@ const Favourites = () => {
     }
   }, [users]); //ako je prazan niz  ne ubacuje nista u favARR
 
+  // const [allMessagesArr, setMessagesArr] = useState([]);
 
+  // useEffect(() => {
+  //   if (allMessages.length > 0) {
+  //     const messageIds = new Set();
+  //     allMessages.forEach((message) => {
+  //       messageIds.add(allMessages.senderId);
+  //     });
 
+  //     setMessagesArr(messageIds);
+  //   }
+  // }, [allMessages]);
 
-  
-  console.log(favourites);
-  console.log(favouritesArr);
+  // console.log(allMessagesArr);
+  // console.log(favouritesArr);
 
   function removeFav(removeId) {
     let newfavourites = favourites.filter((element) => element != removeId);
     localStorage.setItem(`favourites${id}`, JSON.stringify(newfavourites));
-
   }
 
   return (
     <div className="fav">
       <div className="sideb">
-        <ProfileSidebar></ProfileSidebar>
+        <ul id="side">
+          {/* {allMessagesArr?.map((element) => {
+            <li>Message from{element.senderId}</li>;
+          })} */}
+
+          <li>Message from</li>
+        <li>Message from</li>
+        <li>Message from</li>
+        <li>Message from</li>
+        </ul>
+        {/* <ProfileSidebar></ProfileSidebar> */}
       </div>
       <div className="mainFav">
         {favourites.length <= 0 ? (
