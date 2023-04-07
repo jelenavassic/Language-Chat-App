@@ -16,12 +16,14 @@ export const getMessages = async (req, res) => {
 };
 export const getAllMessages = async (req, res) => {
     try {
-      const messages = await ChatMessages.findAll();
+      const messages = await ChatMessages.findAll({ where: { receiverId: req.params.receiverId } });
+
       res.json(messages);
       console.log(messages);
+    
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Internal server error" });
+      res.status(400).json({ message: "Internal server error" });
     }
   };
   

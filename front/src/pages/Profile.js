@@ -3,10 +3,10 @@ import Favourites from "../components/Favourites";
 import axios from "axios";
 import API_URL from "../api";
 import { NavLink } from "react-router-dom";
+import MyChats from "../components/MyChats";
 
-const Profile = () => {
-  // window.location.reload(false);
-  const localUser = JSON.parse(localStorage.getItem("user"));
+const Profile = (users) => {
+   const localUser = JSON.parse(localStorage.getItem("user"));
   const id = localUser.user_id;
 
   const [user, setUser] = useState({});
@@ -24,10 +24,16 @@ const Profile = () => {
     getUser();
   }, [id]);
 
+  
+
+ 
+
   return (
     <div id="profile">
       <section id="myprofile">
         <div id="profileData">
+     
+          <div className="name">
           <div className="profileimg">
             {" "}
             {user.images === null ? (
@@ -38,29 +44,31 @@ const Profile = () => {
                 alt={user.user_id}
               ></img>
             )}
-            {/* <img src={`./profile.jpg`} alt={id}></img> */}
-          </div>
-
-          <div className="w">
-            <h2>
-              <span className="l">My </span>
-              <span className="ch"> favourites</span>
-            </h2>
-          </div>
-          <div className="name">
+           </div>
             <div className="n">
               {user.first_name} {user.last_name}
             </div>
             <div className="l">Practicing: {user.practicing_language}</div>
             <div id="edit"> <NavLink to="/editProfile">Edit Profile</NavLink></div>
+            
+
           </div>
+          <div className="flex-column">
+        <div className="myChats">My Chats</div>
+          <MyChats></MyChats></div>
         </div>
         <div id="myProfileMain">
+             
+           <div className="w">
+            <h2>
+              <span className="l">My </span>
+              <span className="ch"> favourites</span>
+            </h2>
+          </div> 
           <div id="fav">
-            <Favourites></Favourites>
+            <Favourites users={users}></Favourites>
           </div>
-          {/* <div className="chat"> <Chat></Chat></div> */}
-        </div>
+         </div>
       </section>
     </div>
   );

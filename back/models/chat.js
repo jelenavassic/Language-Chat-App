@@ -21,8 +21,8 @@ const ChatMessages = sequelize.define("chat_messages", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  receiver: {
-    type: DataTypes.STRING,
+  receiverId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   message: {

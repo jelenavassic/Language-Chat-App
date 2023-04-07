@@ -10,11 +10,26 @@ import AllUsers from "./pages/AllUsers";
 import Edit from "./pages/Edit";
 import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
-import Chatroom from "./pages/Chatroom";
- 
+import { useState, useEffect } from "react";
+import axios from "axios";
+import API_URL from "./api";
+   
 function App() {
   const user = JSON.parse(localStorage.getItem("user"));
+  const [users, setUsers] = useState([]);
 
+  const getAllUsers = async () => {
+    try {
+      const users = await axios.get(`${API_URL}/AllUsers`);
+      setUsers(users.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
   return (
     <div>
       <BrowserRouter>
@@ -27,15 +42,15 @@ function App() {
             <Route path="/" element={<Home></Home>}></Route>
             <Route path="/register" element={<Register></Register>}></Route>
             <Route path="/login" element={<Login></Login>}></Route>
-            {/* <Route path="*" element={<NotFound />} /> */}
+          
           </Routes>
           {user ? (
             <div>
               <Routes>
-                <Route path="/myprofile" element={<Profile></Profile>}></Route>
+                <Route path="/myprofile" element={<Profile users={users} ></Profile>}></Route>
                 <Route path="/editProfile" element={<Edit></Edit>}></Route>
-                <Route path="/AllUsers" element={<AllUsers></AllUsers>}></Route>
-                <Route path="/chat" element={<Chatroom></Chatroom>}></Route>
+                <Route path="/AllUsers" element={<AllUsers users={users} setUsers={setUsers}></AllUsers>}></Route>
+                 
                 <Route
                   path="/user/:id"
                   element={<UserProfile></UserProfile>}

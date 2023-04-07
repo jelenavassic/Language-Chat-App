@@ -19,7 +19,7 @@ router.put("/edit/:id", editUser)
 router.post("/photos/:id", upload.single('file'),postPhoto)
 router.delete("/user/:id", deleteUser)
 router.get("/messages/:conversationId", getMessages)
-router.get("/messages", getAllMessages)
+router.get("/message/:receiverId", getAllMessages)
 
 
 export default router;

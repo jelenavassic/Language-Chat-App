@@ -229,12 +229,4 @@ const Register = () => {
 
 export default Register;
 
-
-// placeholder={user.first_name}
-//   last_name: {user.last_name}
-//   city: {user.city}
-//   country: {user.country}
-//   email: {user.email}
-//   password: {user.password}
-//   native_language: {user.native_language}
-//   practicing_language: {user.practicing_language}
+ 

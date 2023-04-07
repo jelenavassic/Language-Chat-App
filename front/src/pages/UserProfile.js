@@ -4,9 +4,7 @@ import API_URL from "../api";
 import Sidebar from "../components/Sidebar";
 import { useParams } from "react-router-dom";
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
-import { faV } from "@fortawesome/free-solid-svg-icons";
-// const so = io();
-// const socket =io.connect("http://localhost:5000");
+ 
 
 const UserProfile = () => {
   const socket = io.connect("http://localhost:5000");
@@ -44,11 +42,13 @@ const UserProfile = () => {
       favourites.push(parseInt(id)); // nema mesta za sve podatke iz usera
     }
     localStorage.setItem(`favourites${localId}`, JSON.stringify(favourites));
+    window.location.reload(false);
   }
 
   function removeFav(removeId) {
     let newfavourites = favourites.filter((element) => element != removeId);
     localStorage.setItem(`favourites${localId}`, JSON.stringify(newfavourites));
+    window.location.reload(false);
   }
 
   function generatePrivateChatRoomId(id1, id2) {
@@ -68,7 +68,7 @@ const UserProfile = () => {
       message: message,
       sender: localUser.first_name,
       senderId: localId,
-      receiver: user.first_name + user.user_id,
+      receiverId:  user.user_id,
     };
     // console.log(data.reciver)
     socket.emit("private chat message", privateChatRoomId, data);
@@ -132,7 +132,7 @@ const UserProfile = () => {
     };
   }, [privateChatRoomId]);
 
-  // console.log(messages);
+  
 
   return (
     <div id="userProfile">
@@ -200,7 +200,7 @@ const UserProfile = () => {
         </section>
 
         <section id="input_zone">
-          {/* <div>{privateChatRoomId}</div> */}
+        
           <input
             type="text"
             id="message"
@@ -214,7 +214,7 @@ const UserProfile = () => {
             Send message
           </button>
         </section>
-        {/* <Chat></Chat> */}
+    
       </section>
     </div>
   );

@@ -4,8 +4,7 @@ import { useState } from "react";
 
 import * as Yup from "yup";
 import axios from "axios";
-// import { useState } from "react";
-import API_URL from "../api";
+ import API_URL from "../api";
 import { useNavigate } from "react-router-dom";
 
 const Edit = () => {
@@ -13,7 +12,7 @@ const Edit = () => {
 
   const id = user.user_id;
 
-  ///Napraviti funkciju za uploaf pgoto
+ 
 
   const [formData, setFormData] = useState({
     first_name: user.first_name,
@@ -84,7 +83,6 @@ const Edit = () => {
       edit(formData);
       history("/myprofile");
       window.location.reload(false);
-
     } catch (err) {
       const errors = {};
 
@@ -128,31 +126,23 @@ const Edit = () => {
     upload(photoFile);
     history("/myprofile");
     window.location.reload(false);
-
   };
 
- const deleteAcc = async ()=>{
-  if (window.confirm("Are you sure? :(")) {
-
-    try {
-      await axios.delete(`${API_URL}/user/${id}`).then(function (res) {
-        if (res.status === 200) {
-         
-          localStorage.removeItem("user");
-          history("/");
-          window.location.reload(false);
-        }
-      });
-    } catch (error) {
-      console.log(error);
-  
-       
+  const deleteAcc = async () => {
+    if (window.confirm("Are you sure? :(")) {
+      try {
+        await axios.delete(`${API_URL}/user/${id}`).then(function (res) {
+          if (res.status === 200) {
+            localStorage.removeItem("user");
+            history("/");
+            window.location.reload(false);
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
-
-  }
-  
-  
- }
+  };
 
   return (
     <div id="edit">
@@ -163,7 +153,6 @@ const Edit = () => {
         <div className="mainEdit">
           <div className="uploadPhoto">
             <div className="editPhoto">
-     
               <img
                 src={`http://localhost:5000/api/images/${id}`}
                 alt={user.user_id}
@@ -177,11 +166,13 @@ const Edit = () => {
                 <button type="submit">Upload photo</button>
               </form>
             </div>
-            <button className="button" onClick={deleteAcc}>Delete account</button>
+            <button className="button" onClick={deleteAcc}>
+              Delete account
+            </button>
           </div>
           <form className="editData" onSubmit={handleSubmit}>
             <div className="formDiv">
-              <label htmlFor="first_name">Name:   </label>
+              <label htmlFor="first_name">Name: </label>
               <input
                 type="text"
                 name="first_name"

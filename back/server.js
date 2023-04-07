@@ -88,13 +88,13 @@ io.on("connection", (socket) => {
   // });
   socket.on("private chat message", async (privateChatRoomId,data) => {
     try {
-      const {  sender, message,senderId,receiver } = data;
+      const {  sender, message,senderId,receiverId } = data;
       const chatMessage = await ChatMessages.create({
         conversationId: privateChatRoomId,
-        sender:sender+senderId,
+        sender,
         message,
         senderId,
-        receiver,
+        receiverId,
       });
       console.log("Message saved to database:", chatMessage);
 
