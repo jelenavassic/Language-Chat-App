@@ -1,0 +1,289 @@
+$text-primary: #134c70;
+$text-secondary: #2ba5e6;
+$box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 15px;
+
+$backround: #e3cff2;
+@mixin flex($jus, $al) {
+  display: flex;
+  justify-content: $jus;
+  align-items: $al;
+}
+.menu-icon {
+  display: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1200px) {
+  .btnoptions {
+    width: 40%;
+  }
+  .form {
+    height: 90%;
+    padding: 3%;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .proverb {
+    font-size: 1rem;
+    margin-top: 2%;
+  }
+  #header #navgap {
+    gap: 2%;
+  }
+  .nav {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    position: fixed;
+    right: -100%;
+    width: 100%;
+    height: 80%;
+    box-shadow: $box-shadow;
+    background-color: $backround;
+    transition: all 0.4s ease-in-out;
+    ul {
+      height: 100%;
+    }
+  }
+
+  .nav.show-menu {
+    right: 0;
+    top: 16%;
+  }
+
+  .menu-icon {
+    display: block;
+    position: absolute;
+    top: 35%;
+    right: 5%;
+    color: $text-primary;
+    font-size: 2rem;
+  }
+
+  .nav li {
+    margin-top: 5%;
+  }
+
+  .nav li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .form {
+    height: 90%;
+    padding: 5%;
+  }
+  #main {
+    .sections {
+      height: 80rem;
+      line-height: 2rem;
+      .section {
+        .paraf {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  .btnoptions {
+    width: 70%;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  #userData {
+    margin-top: 15%;
+  }
+  .user {
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .logo {
+    height: 80%;
+    .l,
+    .ch {
+      font-size: smaller;
+    }
+  }
+  .proverb {
+    margin-top: 2%;
+    font-size: 0.8rem;
+  }
+  #proverb {
+    h4 {
+      font-size: 0.7rem;
+    }
+  }
+
+  #main {
+    .sections {
+      .section {
+        @include flex(center, center);
+        flex-direction: column;
+
+        height: 60%;
+        img {
+          width: 50%;
+        }
+        .paraf {
+          padding: 0;
+          margin: 0;
+          font-size: 0.8rem;
+        }
+      }
+      .right {
+        flex-direction: column-reverse;
+      }
+    }
+  }
+  .form {
+    form {
+      margin-top: 5%;
+    }
+  }
+  .inputAll {
+    // background-color: red;
+    @include flex(center, center);
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .user {
+    width: 40%;
+  }
+  .sidebar {
+    top: 7%;
+    width: 15%;
+    h4 {
+      font-size: 1rem;
+    }
+  }
+  #side {
+    font-size: 0.7rem;
+  }
+  .chat {
+    bottom: 10%;
+    height: 70%;
+  }
+  #myprofile {
+    margin-top: 5%;
+  }
+  .mainEdit {
+    margin-top: 55%;
+    @include flex(center, flex-end);
+    flex-direction: column-reverse;
+    .uploadPhoto {
+      @include flex(center, center);
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+  }
+  #chatroom {
+    font-size: 0.6rem;
+  }
+  #feedback {
+    font-size: 0.6rem;
+  }
+  #send_message {
+    font-size: 0.4rem;
+  }
+  #message {
+    font-size: 0.6rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #header {
+    height: 10%;
+    @include flex(flex-start, center);
+    .logo {
+      height: 70%;
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .user {
+    width: 70%;
+  }
+  .btnoptions {
+    width: 40%;
+    align-items: flex-start;
+    flex-direction: row;
+  }
+  .w {
+    h2 {
+      font-size: smaller;
+    }
+  }
+  #myProfile {
+    .name {
+      margin-top: 10%;
+      background-color: #134c70;
+      .n {
+        line-height: 1.2em;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .sidebar {
+    top: 7%;
+    width: 12%;
+  }
+  #side {
+    font-size: 0.7rem;
+  }
+  #filters {
+    p {
+      font-size: 0.7rem;
+    }
+  }
+  .nativeFilter,
+  .practicingFilter {
+    li {
+      font-size: 0.6rem;
+    }
+  }
+  #userProfile {
+    .name {
+      font-size: 0.8rem;
+    }
+    .city {
+      font-size: 0.7rem;
+    }
+    .language {
+      font-size: 0.7rem;
+    }
+    #favbtn {
+      .removeFav,
+      .addFav {
+        padding: 2%;
+        font-size: 0.6rem;
+      }
+    }
+  }
+  .chat {
+    top: 15%;
+  }
+  .proverb {
+    font-size: 0.5rem;
+  }
+  #proverb {
+    h4 {
+      font-size: 0.4rem;
+    }
+  }
+  #myprofile {
+    margin-top: 10%;
+  }
+  .btnoptions {
+    width: 70%;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

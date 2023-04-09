@@ -45,7 +45,7 @@ const MyChats = () => {
   return (
     <div className="sideb">
       {conversationIdsArr <= 0 ? (
-        <div id="emptyDiv">Your active chats will be here.</div>
+        <div id="emptyDiv">Your active chats will be visible here.</div>
       ) : (
         <ul id="side">
           {conversationIdsArr?.map((element) => (

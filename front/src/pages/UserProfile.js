@@ -4,11 +4,9 @@ import API_URL from "../api";
 import Sidebar from "../components/Sidebar";
 import { useParams } from "react-router-dom";
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
- 
-
+import Hashids from 'hashids';
 const UserProfile = () => {
   const socket = io.connect("http://localhost:5000");
-
   const [user, setUser] = useState({});
   const { id } = useParams();
   const localUser = JSON.parse(localStorage.getItem("user"));
@@ -19,6 +17,7 @@ const UserProfile = () => {
   const privateChatRoomId = generatePrivateChatRoomId(id, localId);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+
   const getMessages = async () => {
     try {
       const chatMessages = await axios
@@ -30,7 +29,6 @@ const UserProfile = () => {
           console.error(error);
         });
       console.log(chatMessages);
-      // setMessage(chatMessages);
     } catch (error) {
       console.log(error.message);
     }
@@ -38,8 +36,7 @@ const UserProfile = () => {
 
   function addToFav() {
     if (!favourites.some((elem) => elem == id)) {
-      // console.log(favourites);
-      favourites.push(parseInt(id)); // nema mesta za sve podatke iz usera
+      favourites.push(parseInt(id)); 
     }
     localStorage.setItem(`favourites${localId}`, JSON.stringify(favourites));
     window.location.reload(false);
@@ -52,14 +49,15 @@ const UserProfile = () => {
   }
 
   function generatePrivateChatRoomId(id1, id2) {
-    return parseInt(id1) + parseInt(id2);
+   const uniqueId= (id1*id1)+(id2*id2)
+   return uniqueId
   }
-
   function handleKeyDown(event) {
     if (event.key === "Enter") {
       sendMessage();
     }
   }
+
   function sendMessage() {
     if (!message.trim()) {
       return;
@@ -68,14 +66,13 @@ const UserProfile = () => {
       message: message,
       sender: localUser.first_name,
       senderId: localId,
-      receiverId:  user.user_id,
+      receiverId: user.user_id,
     };
-    // console.log(data.reciver)
+  
     socket.emit("private chat message", privateChatRoomId, data);
     document.getElementById("message").value = "";
     console.log(data);
     setMessage("");
-    // setMessages((prevMessages) => [...prevMessages, { message: message }]);
   }
 
   function stopTyping() {
@@ -85,6 +82,7 @@ const UserProfile = () => {
   const userdata = {
     user: localUser.first_name,
   };
+
   function emitTyping() {
     socket.emit("typing", privateChatRoomId, userdata);
   }
@@ -97,6 +95,7 @@ const UserProfile = () => {
         console.log(error.message);
       }
     };
+    
     getUser();
     getMessages();
     return () => {
@@ -131,8 +130,6 @@ const UserProfile = () => {
       socket.off();
     };
   }, [privateChatRoomId]);
-
-  
 
   return (
     <div id="userProfile">
@@ -185,8 +182,7 @@ const UserProfile = () => {
               key={index}
               className={
                 message.sender.includes(localUser.first_name)
-                  ? //  === localUser.first_name+localId
-                    "message-outgoing"
+                  ? "message-outgoing"
                   : "message-incoming"
               }
             >
@@ -195,12 +191,10 @@ const UserProfile = () => {
               </p>
             </div>
           ))}
-                  <div id="feedback"></div>
-
+          <div id="feedback"></div>
         </section>
 
         <section id="input_zone">
-        
           <input
             type="text"
             id="message"
@@ -214,7 +208,6 @@ const UserProfile = () => {
             Send message
           </button>
         </section>
-    
       </section>
     </div>
   );

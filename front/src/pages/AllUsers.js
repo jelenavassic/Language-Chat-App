@@ -17,20 +17,6 @@ const AllUsers = ({ users, setUsers }) => {
   const favourites = localStorageFav ? JSON.parse(localStorageFav) : [];
   let native_languageArr = [];
   let practicing_languageArr = [];
-  // const [users, setUsers] = useState([]);
-
-  // const getAllUsers = async () => {
-  //   try {
-  //     const users = await axios.get(`${API_URL}/AllUsers`);
-  //     setUsers(users.data);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getAllUsers();
-  // }, []);
 
   function renderFilters() {
     users.forEach((element) => {

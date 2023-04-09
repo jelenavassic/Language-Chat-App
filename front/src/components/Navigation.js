@@ -1,12 +1,21 @@
 import { NavLink } from "react-router-dom";
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Navigation = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  let id;
+  const [showMenu, setShowMenu] = useState(false);
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   function logout() {
     localStorage.removeItem("user");
     window.location.reload(false);
   }
-  const user = JSON.parse(localStorage.getItem("user"));
-  let id;
+  
   return (
     <div id="header">
       <div className="logo">
@@ -20,9 +29,12 @@ const Navigation = () => {
           </div>
         </NavLink>
       </div>
+      <div className="menu-icon" onClick={toggleMenu}>
+      <FontAwesomeIcon icon={faBars} />
 
+    </div>
       {user ? (
-        <ul className="nav navgap">
+        <ul className={`nav ${showMenu ? 'show-menu' : ''}`} id="navgap">
           <div className="hide"> {(id = user.user_id)}</div>
           <li>
             <NavLink to="/">About</NavLink>
@@ -51,7 +63,7 @@ const Navigation = () => {
           </li>
         </ul>
       ) : (
-        <ul className="nav">
+        <ul className={`nav ${showMenu ? 'show-menu' : ''}`}>
           <li>
             <NavLink to="/">About</NavLink>
           </li>

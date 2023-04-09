@@ -2,7 +2,7 @@ const Home = () => {
   return (
     <div id="main">
       <div id="proverb">
-        <h2>
+        <h2 className="proverb">
           "To learn a language is to have one more window from which to look at
           the world."
         </h2>

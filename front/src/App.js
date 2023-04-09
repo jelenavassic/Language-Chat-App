@@ -1,4 +1,5 @@
 import "./App.scss";
+import "./responsive.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Login from "./pages/Login";
@@ -13,7 +14,7 @@ import NotFound from "./pages/NotFound";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import API_URL from "./api";
-   
+
 function App() {
   const user = JSON.parse(localStorage.getItem("user"));
   const [users, setUsers] = useState([]);
@@ -30,27 +31,34 @@ function App() {
   useEffect(() => {
     getAllUsers();
   }, []);
+
   return (
     <div>
       <BrowserRouter>
         <div className="navigation">
           <Navigation></Navigation>
         </div>
-
         <div>
           <Routes>
             <Route path="/" element={<Home></Home>}></Route>
             <Route path="/register" element={<Register></Register>}></Route>
             <Route path="/login" element={<Login></Login>}></Route>
-          
           </Routes>
+
           {user ? (
             <div>
               <Routes>
-                <Route path="/myprofile" element={<Profile users={users} ></Profile>}></Route>
+                <Route
+                  path="/myprofile"
+                  element={<Profile users={users}></Profile>}
+                ></Route>
                 <Route path="/editProfile" element={<Edit></Edit>}></Route>
-                <Route path="/AllUsers" element={<AllUsers users={users} setUsers={setUsers}></AllUsers>}></Route>
-                 
+                <Route
+                  path="/AllUsers"
+                  element={
+                    <AllUsers users={users} setUsers={setUsers}></AllUsers>
+                  }
+                ></Route>
                 <Route
                   path="/user/:id"
                   element={<UserProfile></UserProfile>}
@@ -59,17 +67,16 @@ function App() {
             </div>
           ) : (
             <Routes>
-            <Route path="/myprofile" element={<NotFound />}></Route>
-            <Route path="/editProfile" element={<NotFound />}></Route>
-            <Route path="/AllUsers" element={<NotFound />}></Route>
-            <Route
-              path="/user/:id"
-              element={<UserProfile></UserProfile>}
-            ></Route>
-          </Routes>
+              <Route path="/myprofile" element={<NotFound />}></Route>
+              <Route path="/editProfile" element={<NotFound />}></Route>
+              <Route path="/AllUsers" element={<NotFound />}></Route>
+              <Route
+                path="/user/:id"
+                element={<UserProfile></UserProfile>}
+              ></Route>
+            </Routes>
           )}
         </div>
-
         <div className="footer">
           <Footer></Footer>
         </div>

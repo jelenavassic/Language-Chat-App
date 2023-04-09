@@ -16,7 +16,7 @@ const Register = () => {
     native_language: "",
     practicing_language: "",
   });
-
+  const history = useNavigate();
   const [formErrors, setFormErrors] = useState({});
 
   const registrationSchema = Yup.object().shape({
@@ -43,8 +43,7 @@ const Register = () => {
       .matches(/^[A-Z][a-z]*$/, "Must start with an uppercase letter")
       .required("Required"),
   });
-  //
-  const history = useNavigate();
+ 
 
   const register = async (newUser) => {
     try {
@@ -72,20 +71,14 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
-
-
     try {
       await registrationSchema.validate(formData, { abortEarly: false });
       register(formData);
     } catch (err) {
       const errors = {};
-
       err.inner.forEach((error) => {
         errors[error.path] = error.message;
       });
-
       setFormErrors(errors);
     }
   };

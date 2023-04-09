@@ -1,19 +1,12 @@
-import Sidebar from "../components/Sidebar";
-
 import { useState } from "react";
-
 import * as Yup from "yup";
 import axios from "axios";
- import API_URL from "../api";
+import API_URL from "../api";
 import { useNavigate } from "react-router-dom";
 
 const Edit = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-
   const id = user.user_id;
-
- 
-
   const [formData, setFormData] = useState({
     first_name: user.first_name,
     last_name: user.last_name,
@@ -24,9 +17,9 @@ const Edit = () => {
     native_language: user.native_language,
     practicing_language: user.practicing_language,
   });
-
+  const history = useNavigate();
   const [formErrors, setFormErrors] = useState({});
-
+  const [photoFile, setPhotoFile] = useState(null);
   const registrationSchema = Yup.object().shape({
     first_name: Yup.string()
       .matches(/^[A-Z][a-z]*$/, "Must start with an uppercase letter")
@@ -60,7 +53,6 @@ const Edit = () => {
       });
     } catch (error) {
       console.log(error);
-
       let er = document.getElementById("errorReg");
       er.style.display = "block";
       setFormErrors({});
@@ -73,11 +65,9 @@ const Edit = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const history = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       await registrationSchema.validate(formData, { abortEarly: false });
       edit(formData);
@@ -85,16 +75,12 @@ const Edit = () => {
       window.location.reload(false);
     } catch (err) {
       const errors = {};
-
       err.inner.forEach((error) => {
         errors[error.path] = error.message;
       });
-
       setFormErrors(errors);
     }
   };
-
-  const [photoFile, setPhotoFile] = useState(null);
 
   const handlePhotoChange = (event) => {
     setPhotoFile(event.target.files[0]);
@@ -111,18 +97,15 @@ const Edit = () => {
         },
       });
       if (response.status === 200) {
-        // alert("ok");
       }
     } catch (error) {
       console.log(error);
-      // alert(error);
     }
   };
 
   const handlePhotoSubmit = (event) => {
     event.preventDefault();
-
-    console.log(photoFile);
+    // console.log(photoFile);
     upload(photoFile);
     history("/myprofile");
     window.location.reload(false);
@@ -146,9 +129,6 @@ const Edit = () => {
 
   return (
     <div id="edit">
-      <section className="sidebar">
-        <Sidebar></Sidebar>
-      </section>
       <section>
         <div className="mainEdit">
           <div className="uploadPhoto">
