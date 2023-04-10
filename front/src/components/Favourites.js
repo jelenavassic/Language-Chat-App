@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useMemo} from "react";
 import { NavLink } from "react-router-dom";
 
 const Favourites = (users) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const id = user.user_id;
   const localStorageFav = localStorage.getItem(`favourites${id}`);
-  const favourites = localStorageFav ? JSON.parse(localStorageFav) : [];
+  const favourites = useMemo(() => localStorageFav ? JSON.parse(localStorageFav) : [], [localStorageFav]);
   const allUsers = users.users.users;
   const [favouritesArr, setFavouritesArr] = useState([]);
+  const [favouritesCount, setFavouritesCount] = useState(0);
 
   useEffect(() => {
     if (allUsers.length > 0) {
@@ -16,11 +17,13 @@ const Favourites = (users) => {
       );
       setFavouritesArr(mappedFavourites);
     }
-  }, [allUsers]); //ako je prazan niz  ne ubacuje nista u favARR
+  }, [allUsers,favourites]);  
 
   function removeFav(removeId) {
     let newfavourites = favourites.filter((element) => element != removeId);
     localStorage.setItem(`favourites${id}`, JSON.stringify(newfavourites));
+    setFavouritesCount((prevCount) => prevCount + 1);
+
   }
 
   return (
