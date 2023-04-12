@@ -564,7 +564,7 @@ body {
   .nativeFilter,
   .practicingFilter {
     padding: 10%;
-    margin: 10%;
+    margin:5% 12%;
     font-size: 0.8rem;
     color: $text-primary;
     font-weight: bolder;
@@ -805,6 +805,7 @@ body {
 #chatroom {
   position: absolute;
   font-size: 0.9rem;
+  color:white;
   padding-bottom: 15%;
   flex-direction: column;
   overflow-y: scroll;
@@ -855,9 +856,12 @@ body {
     width: 100%;
     height: 100%;
     font-size: 1rem;
+    
   }
   #send_message {
-    height: 100%;
+    @include flex(center, center);
+flex-wrap: wrap;
+    // height: 100%;
     font-size: 0.7rem;
   }
 }

@@ -12,6 +12,7 @@ $backround: #e3cff2;
   display: none;
   cursor: pointer;
 }
+/////////////////////////////////////////////1200/////////////////////////////////////
 
 @media only screen and (max-width: 1200px) {
   .btnoptions {
@@ -22,7 +23,7 @@ $backround: #e3cff2;
     padding: 3%;
   }
 }
-
+/////////////////////////////////////////////992/////////////////////////////////////
 @media only screen and (max-width: 992px) {
   .proverb {
     font-size: 1rem;
@@ -98,7 +99,15 @@ $backround: #e3cff2;
   .user {
     width: 30%;
   }
+  .sidebar {
+    top: 7%;
+    width: 12%;
+  }
+  #side {
+    font-size: 0.7rem;
+  }
 }
+/////////////////////////////////////////////768/////////////////////////////////////
 
 @media only screen and (max-width: 768px) {
   .logo {
@@ -192,7 +201,9 @@ $backround: #e3cff2;
   #message {
     font-size: 0.6rem;
   }
+
 }
+/////////////////////////////////////////////600/////////////////////////////////////
 
 @media only screen and (max-width: 600px) {
   #header {
@@ -231,13 +242,7 @@ $backround: #e3cff2;
     }
   }
 
-  .sidebar {
-    top: 7%;
-    width: 12%;
-  }
-  #side {
-    font-size: 0.7rem;
-  }
+
   #filters {
     p {
       font-size: 0.7rem;

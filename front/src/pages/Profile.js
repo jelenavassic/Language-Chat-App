@@ -29,7 +29,7 @@ const Profile = (users) => {
         <div id="profileData">
           <div className="name">
             <div className="profileimg">
-              {" "}
+          
               {user.images === null ? (
                 <img src={`./profile.jpg`} alt={id}></img>
               ) : (

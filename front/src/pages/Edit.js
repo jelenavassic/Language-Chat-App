@@ -133,10 +133,14 @@ const Edit = () => {
         <div className="mainEdit">
           <div className="uploadPhoto">
             <div className="editPhoto">
-              <img
-                src={`http://localhost:5000/api/images/${id}`}
-                alt={user.user_id}
-              ></img>
+            {user.images === null ? (
+                <img src={`./profile.jpg`} alt={id}></img>
+              ) : (
+                <img
+                  src={`http://localhost:5000/api/images/${user.user_id}`}
+                  alt={user.user_id}
+                ></img>
+              )}
               <form onSubmit={handlePhotoSubmit}>
                 <input
                   type="file"

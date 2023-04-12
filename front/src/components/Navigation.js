@@ -51,10 +51,14 @@ const Navigation = () => {
           <li>
             <div className="flex-column">
               <div id="sideImg">
+              {user.images === null ? (
+                <img src={`./profile.jpg`} alt={id}></img>
+              ) : (
                 <img
-                  src={`http://localhost:5000/api/images/${id}`}
-                  alt={id}
-                ></img>{" "}
+                  src={`http://localhost:5000/api/images/${user.user_id}`}
+                  alt={user.user_id}
+                ></img>
+              )}
               </div>
               <div>
                 {user.first_name} {user.last_name}
