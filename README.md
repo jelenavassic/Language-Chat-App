@@ -2,7 +2,19 @@
 
 LANGUAGE CHAT allows users to connect with other people who want to practice foreign languages.
 
-![Main Interface](https://drive.google.com/file/d/10VU1y7L9EvGdl_mHeiJChViArpwv7VeV/view?usp=sharing)
+![Home page]( https://i.imgur.com/Jpnumny.png)
+![Register](https://i.imgur.com/sDSMYQF.png)
+![Login](https://i.imgur.com/jeqoOAX.png)
+![My profile](https://i.imgur.com/7OEtsL9.png)
+![Find a partner](https://i.imgur.com/o4x72ET.png)
+![Filter](https://i.imgur.com/e1zaCpF.png)
+![My favorites](https://i.imgur.com/uYtAMYv.png)
+![Chat](https://i.imgur.com/RmHXHLl.png)
+![Edit profile](https://i.imgur.com/hNbhYjU.png)
+
+
+
+
 ## Project Description
 
 The project LANGUAGE CHAT is a web application built using the React framework. 
