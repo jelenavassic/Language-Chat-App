@@ -2,7 +2,7 @@
 
 LANGUAGE CHAT allows users to connect with other people who want to practice foreign languages.
 
-
+![Main Interface](https://drive.google.com/file/d/10VU1y7L9EvGdl_mHeiJChViArpwv7VeV/view?usp=drive_link)
 ## Project Description
 
 The project LANGUAGE CHAT is a web application built using the React framework. 
